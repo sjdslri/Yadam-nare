@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07070A">
+<title>蹖丕丿賲 賳乇賴</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070A;--sf:rgba(255,255,255,.07);--sf2:rgba(255,255,255,.12);--ink:#F5F1EC;--mu:#A39B94;--ac:#FF7A1A;--ai:#1A0B00;--sun:#FFB020;--dg:#FF4D4D;--ln:rgba(255,255,255,.13);--r:22px;--bl:blur(22px) saturate(160%)}
+:root[data-theme=light]{--bg:#FFF1E3;--sf:rgba(255,255,255,.6);--sf2:rgba(255,255,255,.9);--ink:#1C130C;--mu:#7A6A5C;--ac:#F26A00;--ai:#fff;--ln:rgba(120,70,20,.18)}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{font-family:Vazirmatn,Tahoma,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;min-height:100dvh;line-height:1.7;overflow-x:hidden}
+body::before,body::after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(90px);pointer-events:none}
+body::before{width:420px;height:420px;top:-120px;right:-80px;background:var(--ac);opacity:.35}
+body::after{width:360px;height:360px;bottom:-100px;left:-100px;background:#FF3D00;opacity:.22}
+button,input,select{font:inherit;color:inherit}button{cursor:pointer;border:0;background:none}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.app{max-width:1180px;margin:0 auto;padding:20px 16px 40px;display:grid;grid-template-columns:200px 1fr 290px;gap:20px;align-items:start}
+.card,.day,.srch,.task,.arr,.theme,.nav{background:var(--sf);border:1px solid var(--ln);-webkit-backdrop-filter:var(--bl);backdrop-filter:var(--bl)}
+.card{border-radius:var(--r);padding:16px;box-shadow:0 10px 40px -20px #000}
+.logo{font-weight:900;font-size:24px;margin-bottom:14px}.logo i{font-style:normal;color:var(--ac)}
+.nav{display:grid;gap:4px;background:none;border:0;-webkit-backdrop-filter:none;backdrop-filter:none}
+.nav button{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:14px;color:var(--mu);text-align:right}
+.nav button span{flex:1}.nav em{font-style:normal}
+.nav button[aria-pressed=true]{background:var(--ac);color:var(--ai);font-weight:700}
+.nav b{font-weight:400;font-size:12px;opacity:.85}
+.hd{margin-bottom:14px}.hd small{color:var(--mu)}
+.hd h1{font-size:clamp(26px,6vw,38px);font-weight:900;line-height:1.25}
+.week{display:flex;gap:6px;align-items:center;margin-bottom:14px}
+.days{flex:1;display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.day{border-radius:16px;padding:8px 0;text-align:center;font-size:12px;color:var(--mu);position:relative;min-width:0}
+.day strong{display:block;font-size:19px;color:var(--ink);line-height:1.3}
+.day[aria-pressed=true]{background:linear-gradient(160deg,var(--sun),var(--ac));border-color:transparent;color:var(--ai);box-shadow:0 8px 24px -8px var(--ac)}
+.day[aria-pressed=true] strong{color:var(--ai)}
+.day.today:not([aria-pressed=true]){border-color:var(--ac);border-width:2px}
+.day i{position:absolute;bottom:3px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--ac)}
+.day[aria-pressed=true] i{background:var(--ai)}
+.arr{width:34px;height:34px;border-radius:50%;flex:none}
+.comp input[type=text]{width:100%;border:0;background:none;font-size:18px;padding:8px 6px}.comp input:focus{outline:none}
+.comp input::placeholder,.srch::placeholder{color:var(--mu)}
+.pv{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding-top:8px;border-top:1px dashed var(--ln);font-size:13px}
+.pv select{background:var(--sf2);border:1px solid var(--ln);border-radius:10px;padding:2px 8px;color:var(--ink)}
+.pv select option{color:#000}
+.chip{background:var(--sf2);border-radius:99px;padding:0 10px;color:var(--mu)}.chip.on{background:var(--ac);color:var(--ai);font-weight:600}
+.pv .hint{margin-right:auto;color:var(--mu);font-size:12px}
+.srch{width:100%;margin:14px 0 10px;padding:9px 16px;border-radius:99px}
+ul{list-style:none;padding:0;display:grid;gap:9px}
+.task{display:flex;align-items:center;gap:12px;border-radius:18px;padding:10px 14px;border-right:5px solid var(--p);animation:in .3s both}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.p3{--p:var(--dg)}.p2{--p:var(--ac)}.p1{--p:var(--mu)}
+.chk{flex:none;width:30px;height:30px;border-radius:50%;border:2.5px solid var(--mu);display:grid;place-items:center;transition:.2s}
+.chk svg{width:15px;height:15px;stroke:var(--ai);stroke-width:3.5;fill:none;stroke-dasharray:24;stroke-dashoffset:24;transition:.3s}
+.done .chk{background:var(--ac);border-color:var(--ac);animation:pop .4s}.done .chk svg{stroke-dashoffset:0}
+@keyframes pop{50%{transform:scale(1.35);box-shadow:0 0 0 10px color-mix(in srgb,var(--ac) 28%,transparent)}}
+.bd{flex:1;min-width:0}.t{font-weight:600;font-size:16px;overflow-wrap:anywhere}.t[contenteditable=true]{outline:2px solid var(--sun);border-radius:6px}
+.done .t{text-decoration:line-through;color:var(--mu);font-weight:400}
+.mt{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--mu)}.late{color:var(--dg);font-weight:600}
+.ib{opacity:.55;padding:8px 10px;border-radius:12px;min-width:38px;min-height:38px}.ib:hover,.ib:focus-visible{opacity:1;background:var(--sf2)}
+.empty{text-align:center;padding:36px 10px;color:var(--mu);border:2px dashed var(--ln);border-radius:var(--r)}.empty b{display:block;color:var(--ink);font-size:19px}
+.panel{display:grid;gap:16px;position:sticky;top:16px}
+.ring{position:relative;width:120px;height:120px;margin:0 auto 6px}.ring svg{transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:11;stroke-linecap:round}.tr{stroke:var(--ln)}
+.pg{stroke:var(--ac);stroke-dasharray:314;stroke-dashoffset:314;transition:stroke-dashoffset .8s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 0 6px var(--ac))}
+.ring.full .pg{stroke:var(--sun)}
+.ring div{position:absolute;inset:0;display:grid;place-items:center;font-size:26px;font-weight:900}
+.sub{text-align:center;color:var(--mu);font-size:14px}
+.bars{display:flex;gap:6px;align-items:flex-end;height:70px;margin-top:6px}
+.bars span{flex:1;background:linear-gradient(var(--sun),var(--ac));border-radius:6px 6px 2px 2px;min-height:4px}.bars span.t0{background:var(--ln)}
+.lbl{display:flex;gap:6px;font-size:11px;color:var(--mu)}.lbl span{flex:1;text-align:center}
+.h2{font-weight:800;margin-bottom:8px}
+.tm{font-size:46px;font-weight:900;text-align:center;font-variant-numeric:tabular-nums;line-height:1.2}
+.ft{text-align:center;font-size:13px;color:var(--mu);min-height:22px;margin-bottom:8px;overflow-wrap:anywhere}
+.fb{display:flex;gap:8px;justify-content:center}
+.fb button{padding:8px 22px;border-radius:99px;background:var(--sf2);font-weight:600}.fb .go{background:var(--ac);color:var(--ai)}
+.stats{display:flex;justify-content:space-around;text-align:center;font-size:12px;color:var(--mu)}.stats b{display:block;font-size:20px;color:var(--ink)}
+.side-bot{display:flex;gap:8px;flex-wrap:wrap}.side-bot button{flex:1;font-size:13px;color:var(--mu);padding:8px;border-radius:12px;background:var(--sf2)}
+.theme{position:fixed;top:calc(10px + env(safe-area-inset-top));left:12px;width:40px;height:40px;border-radius:50%;z-index:30}
+.app>aside:first-child .logo{display:block}
+@media(max-width:980px){
+ .app{grid-template-columns:1fr;gap:16px;padding:calc(16px + env(safe-area-inset-top)) 14px calc(96px + env(safe-area-inset-bottom))}
+ .panel{position:static}
+ .app>aside:first-child{padding:0;border:0;background:none;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+ .logo{margin-bottom:0;position:absolute;top:calc(14px + env(safe-area-inset-top));right:16px;font-size:20px}
+ .hd{padding-top:34px}
+ .nav{position:fixed;z-index:20;right:12px;left:12px;bottom:calc(10px + env(safe-area-inset-bottom));grid-auto-flow:column;grid-auto-columns:1fr;gap:2px;padding:6px;border-radius:26px;background:var(--sf2);border:1px solid var(--ln);-webkit-backdrop-filter:var(--bl);backdrop-filter:var(--bl);box-shadow:0 14px 40px -10px #000}
+ .nav button{flex-direction:column;gap:0;padding:6px 2px;font-size:11px;line-height:1.35;text-align:center;border-radius:20px;min-height:54px;justify-content:center}
+ .nav button span{flex:none}.nav em{font-size:20px;line-height:1.2}.nav b{display:none}
+ .task{padding:10px 12px}
+ .comp input[type=text],.srch{font-size:16px}
+ .pv .hint{flex-basis:100%;margin:0}
+}
+@media(max-width:420px){.day{font-size:11px;border-radius:13px}.day strong{font-size:17px}.arr{width:30px;height:30px}.ib{padding:6px;min-width:34px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<button class="theme" id="theme" aria-label="鬲睾蹖蹖乇 鬲賲">馃寭</button>
+<div class="app">
+ <aside class="card">
+  <div class="logo">蹖丕丿賲 <i>賳乇賴</i></div>
+  <nav class="nav" id="nav"></nav>
+ </aside>
+
+ <main>
+  <div class="hd"><small id="hello"></small><h1 id="title"></h1></div>
+  <div class="week"><button class="arr" id="nx" aria-label="賴賮鬲賴 亘毓丿">鈥�</button><div class="days" id="days"></div><button class="arr" id="pv" aria-label="賴賮鬲賴 賯亘賱">鈥�</button></div>
+  <section class="card comp">
+   <input type="text" id="in" maxlength="140" autocomplete="off" placeholder="賲孬賱丕賸: 鬲賲丿蹖丿 賯亘囟 丕蹖賳鬲乇賳鬲 賮乇丿丕 賲賴賲 #禺乇蹖丿">
+   <div class="pv" id="pre"></div>
+  </section>
+  <input class="srch" id="q" type="search" placeholder="噩爻鬲鈥屬堌� 丿乇 讴丕乇賴丕鈥�" aria-label="噩爻鬲鈥屬堌�">
+  <ul id="list" aria-live="polite"></ul>
+ </main>
+
+ <aside class="panel">
+  <section class="card">
+   <div class="ring" id="ring"><svg viewBox="0 0 120 120"><circle class="tr" cx="60" cy="60" r="50"/><circle class="pg" id="pg" cx="60" cy="60" r="50"/></svg><div id="pct">郯侏</div></div>
+   <div class="sub" id="sub"></div>
+  </section>
+  <section class="card">
+   <div class="h2">鬲賲乇讴夭</div>
+   <div class="tm" id="tm">鄄鄣:郯郯</div>
+   <div class="ft" id="ft">乇賵蹖 鈻� 讴賳丕乇 蹖讴 讴丕乇 亘夭賳</div>
+   <div class="fb"><button class="go" id="go">卮乇賵毓</button><button id="rs">乇蹖爻鬲</button></div>
+  </section>
+  <section class="card">
+   <div class="h2">賴賮鬲賴 丕禺蹖乇</div>
+   <div class="bars" id="bars"></div><div class="lbl" id="lbl"></div>
+   <div class="stats" style="margin-top:12px"><div><b id="s1">郯</b>讴丕乇 丕賳噩丕賲鈥屫簇�</div><div><b id="s2">郯</b>丿賯蹖賯賴 鬲賲乇讴夭</div><div><b id="s3">郯</b>亘賴鬲乇蹖賳 倬蹖賵爻鬲诏蹖</div></div>
+  </section>
+ <section class="card"><div class="side-bot"><button id="exp">猬� 匕禺蹖乇賴 賳爻禺賴 倬卮鬲蹖亘丕賳</button><button id="imp">猬� 亘丕夭诏乇丿丕賳蹖 賳爻禺賴 倬卮鬲蹖亘丕賳</button><input type="file" id="file" accept=".json" hidden></div></section>
+ </aside>
+</div>
+
+<script>
+const $=s=>document.querySelector(s), fa=n=>Number(n).toLocaleString('fa-IR');
+const iso=d=>{const x=new Date(d);return new Date(x.getTime()-x.getTimezoneOffset()*6e4).toISOString().slice(0,10)};
+const add=(s,n)=>{const d=new Date(s+'T12:00');d.setDate(d.getDate()+n);return iso(d)};
+const TODAY=iso(new Date());
+const ST={g(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},s(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let tasks=ST.g('yn2_tasks',[]), log=ST.g('yn2_log',{}), foc=ST.g('yn2_foc',{});
+let sel=TODAY, view='day', wk=0, q='', focusId=null;
+const CATS=['馃彔 卮禺氐蹖','馃捈 讴丕乇','馃洅 禺乇蹖丿','馃摎 蹖丕丿诏蹖乇蹖','馃挭 爻賱丕賲鬲'];
+const save=()=>{ST.s('yn2_tasks',tasks);ST.s('yn2_log',log);ST.s('yn2_foc',foc);render()};
+
+// theme + header
+const R=document.documentElement;R.dataset.theme=ST.g('yn_theme','dark');
+$('#theme').onclick=()=>{const t=R.dataset.theme==='dark'?'light':'dark';R.dataset.theme=t;ST.s('yn_theme',t)};
+const hr=new Date().getHours();$('#hello').textContent=hr<5?'卮亘鈥屫ㄘ屫�':hr<12?'氐亘丨鈥屫ㄘ屫�':hr<17?'馗賴乇鈥屫ㄘ屫�':hr<20?'毓氐乇亘禺蹖乇':'卮亘鈥屫ㄘ屫�';
+const fd=(s,o)=>new Date(s+'T12:00').toLocaleDateString('fa-IR',o);
+
+// smart parse
+function parse(raw){
+  let t=raw,due=sel,pri=2,rep='',cat=null,hit=[];
+  const rm=(re,fn,label)=>{if(re.test(t)){t=t.replace(re,' ');fn();hit.push(label)}};
+  rm(/賴乇\s*乇賵夭/,()=>rep='d','鬲讴乇丕乇 乇賵夭丕賳賴');rm(/賴乇\s*賴賮鬲賴/,()=>rep='w','鬲讴乇丕乇 賴賮鬲诏蹖');
+  rm(/倬爻[\s鈥宂?賮乇丿丕/,()=>due=add(TODAY,2),'倬爻鈥屬佖必�');rm(/(^|\s)賮乇丿丕(?=\s|$)/,()=>due=add(TODAY,1),'賮乇丿丕');rm(/(^|\s)丕賲乇賵夭(?=\s|$)/,()=>due=TODAY,'丕賲乇賵夭');
+  rm(/(^|\s)(賲賴賲|!)(?=\s|$)/,()=>pri=3,'賲賴賲');rm(/(^|\s)(讴賲鈥屫з囐呟屫獆亘毓丿丕賸)(?=\s|$)/,()=>pri=1,'讴賲');
+  const m=t.match(/#(\S+)/);if(m){const c=CATS.find(c=>c.includes(m[1]));if(c){cat=c;t=t.replace(m[0],' ');hit.push(c)}}
+  return{text:t.replace(/\s+/g,' ').trim(),due,pri,rep,cat,hit};
+}
+let cur=CATS[0];
+function preview(){
+  const p=parse($('#in').value);
+  $('#pre').innerHTML=`<select id="cs" aria-label="丿爻鬲賴">${CATS.map(c=>`<option ${c===(p.cat||cur)?'selected':''}>${c}</option>`).join('')}</select>
+  <span class="chip on">${fd(p.due,{weekday:'short',day:'numeric',month:'long'})}</span>
+  ${p.hit.filter(h=>!CATS.includes(h)&&h!=='賮乇丿丕'&&h!=='丕賲乇賵夭'&&h!=='倬爻鈥屬佖必�').map(h=>`<span class="chip on">${h}</span>`).join('')}
+  <span class="hint">亘賳賵蹖爻: 賮乇丿丕 路 賲賴賲 路 賴乇 乇賵夭 路 #讴丕乇</span>`;
+  $('#cs').onchange=e=>cur=e.target.value;
+}
+function addTask(){
+  const p=parse($('#in').value);if(!p.text){$('#in').focus();return}
+  tasks.unshift({id:Date.now(),text:p.text,cat:p.cat||cur,pri:p.pri,due:p.due,rep:p.rep,done:false,streak:0,best:0,foc:0});
+  $('#in').value='';preview();save();
+}
+$('#in').addEventListener('input',preview);
+$('#in').addEventListener('keydown',e=>{if(e.key==='Enter')addTask()});
+document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement.tagName!=='INPUT'&&!document.activeElement.isContentEditable){e.preventDefault();$('#in').focus()}});
+
+// complete
+function toggle(t){
+  if(t.rep){
+    t.streak++;t.best=Math.max(t.best,t.streak);log[TODAY]=(log[TODAY]||0)+1;
+    t.due=add(t.due<TODAY?TODAY:t.due,t.rep==='d'?1:7);
+  }else{
+    t.done=!t.done;t.doneAt=t.done?TODAY:null;
+    log[TODAY]=Math.max(0,(log[TODAY]||0)+(t.done?1:-1));
+  }
+  save();
+}
+function dl(t){
+  const d=Math.round((new Date(t.due)-new Date(TODAY))/864e5);
+  if(d===0)return['丕賲乇賵夭',''];if(d===1)return['賮乇丿丕',''];if(d===-1)return['丿蹖乇賵夭',t.done?'':'late'];
+  if(d<0)return[fa(-d)+' 乇賵夭 毓賯亘',t.done?'':'late'];return[fa(d)+' 乇賵夭 丿蹖诏乇',''];
+}
+
+// nav
+const VIEWS=[['day','馃搮 乇賵夭'],['all','馃搵 賴賲賴'],['habits','馃敟 毓丕丿鬲鈥屬囏�'],['done','鉁� 丕賳噩丕賲鈥屫簇�']];
+function renderNav(){
+  const cnt={day:0,all:tasks.filter(t=>!t.done).length,habits:tasks.filter(t=>t.rep).length,done:tasks.filter(t=>t.done).length};
+  $('#nav').innerHTML=VIEWS.map(([k,l])=>`<button data-v="${k}" aria-pressed="${view===k}"><em>${l.slice(0,2)}</em><span>${l.slice(3)}</span>${k==='day'?'':`<b>${fa(cnt[k])}</b>`}</button>`).join('');
+  document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{view=b.dataset.v;render()});
+}
+function renderWeek(){
+  const base=new Date(TODAY+'T12:00');base.setDate(base.getDate()-((base.getDay()+1)%7)+wk*7);
+  let h='';for(let i=0;i<7;i++){const d=new Date(base);d.setDate(base.getDate()+i);const s=iso(d);
+    const n=tasks.some(t=>!t.done&&t.due===s);
+    h+=`<button class="day ${s===TODAY?'today':''}" data-d="${s}" aria-pressed="${s===sel&&view==='day'}">${fd(s,{weekday:'short'})}<strong>${fd(s,{day:'numeric'})}</strong>${n?'<i></i>':''}</button>`}
+  $('#days').innerHTML=h;
+  document.querySelectorAll('.day').forEach(b=>b.onclick=()=>{sel=b.dataset.d;view='day';render()});
+}
+$('#nx').onclick=()=>{wk++;renderWeek()};$('#pv').onclick=()=>{wk--;renderWeek()};
+$('#q').oninput=e=>{q=e.target.value.trim();renderList()};
+
+function renderList(){
+  let L=tasks.filter(t=>view==='day'?(t.due===sel||(sel===TODAY&&!t.done&&t.due<TODAY)):view==='all'?!t.done:view==='habits'?t.rep:t.done);
+  if(q)L=tasks.filter(t=>t.text.includes(q)||t.cat.includes(q));
+  L.sort((a,b)=>a.done-b.done||b.pri-a.pri||a.due.localeCompare(b.due));
+  const ul=$('#list');ul.innerHTML='';
+  L.forEach(t=>{
+    const[lbl,cls]=dl(t),li=document.createElement('li');
+    li.className=`task p${t.pri}${t.done?' done':''}`;
+    li.innerHTML=`<button class="chk" aria-label="丕賳噩丕賲 卮丿"><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg></button>
+    <div class="bd"><div class="t" title="丿賵亘丕乇 讴賱蹖讴 亘乇丕蹖 賵蹖乇丕蹖卮"></div><div class="mt"><span>${t.cat}</span><span class="${cls}">${lbl}</span>${t.rep?`<span>馃攣 ${t.rep==='d'?'乇賵夭丕賳賴':'賴賮鬲诏蹖'}</span><span>馃敟 ${fa(t.streak)}</span>`:''}${t.foc?`<span>鈴� ${fa(t.foc)} 丿賯蹖賯賴</span>`:''}</div></div>
+    <button class="ib" aria-label="卮乇賵毓 鬲賲乇讴夭">鈻�</button><button class="ib" aria-label="丨匕賮">鉁�</button>`;
+    const tx=li.querySelector('.t');tx.textContent=t.text;
+    li.querySelector('.chk').onclick=()=>toggle(t);
+    const[b1,b2]=li.querySelectorAll('.ib');
+    b1.onclick=()=>{focusId=t.id;resetTimer();$('#ft').textContent='馃幆 '+t.text;$('#go').click()};
+    b2.onclick=()=>{tasks=tasks.filter(x=>x.id!==t.id);save()};
+    tx.ondblclick=()=>{tx.contentEditable=true;tx.focus()};
+    const fin=()=>{if(tx.contentEditable!=='true')return;tx.contentEditable=false;const v=tx.textContent.trim();if(v)t.text=v;save()};
+    tx.onblur=fin;tx.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();tx.blur()}};
+    ul.appendChild(li);
+  });
+  if(!L.length){const m=q?['趩蹖夭蹖 倬蹖丿丕 賳卮丿','毓亘丕乇鬲 丿蹖诏乇蹖 乇丕 丕賲鬲丨丕賳 讴賳.']:view==='habits'?['賴賳賵夭 毓丕丿鬲蹖 賳丿丕乇蹖','賴賳诏丕賲 賳賵卮鬲賳貙 芦賴乇 乇賵夭禄 蹖丕 芦賴乇 賴賮鬲賴禄 丕囟丕賮賴 讴賳.']:view==='done'?['賴賳賵夭 趩蹖夭蹖 鬲賲賵賲 賳卮丿賴','亘丕 鬲蹖讴 夭丿賳 讴丕乇賴丕 丕蹖賳噩丕 噩賲毓 賲蹖鈥屫促�.']:['丕蹖賳 乇賵夭 禺丕賱蹖賴 鉁�','蹖賴 讴丕乇 亘賳賵蹖爻 蹖丕 丕爻鬲乇丕丨鬲 讴賳.'];
+    ul.innerHTML=`<div class="empty"><b>${m[0]}</b>${m[1]}</div>`}
+}
+function renderStats(){
+  const pend=tasks.filter(t=>!t.done&&t.due<=TODAY).length,dn=log[TODAY]||0,tot=pend+dn,p=tot?dn/tot:0;
+  $('#pg').style.strokeDashoffset=314*(1-p);$('#ring').classList.toggle('full',tot>0&&p===1);
+  $('#pct').textContent=fa(Math.round(p*100))+'侏';
+  $('#sub').textContent=!tot?'亘乇丕蹖 丕賲乇賵夭 讴丕乇蹖 賳丿丕乇蹖':p===1?'賴賲賴鈥屭嗃� 鬲賲賵賲 卮丿貙 丿賲鬲 诏乇賲 馃帀':`${fa(pend)} 讴丕乇 賲賵賳丿賴 亘乇丕蹖 丕賲乇賵夭`;
+  const ds=[...Array(7)].map((_,i)=>add(TODAY,i-6)),mx=Math.max(1,...ds.map(d=>log[d]||0));
+  $('#bars').innerHTML=ds.map(d=>`<span class="${log[d]?'':'t0'}" style="height:${(log[d]||0)/mx*100}%" title="${fa(log[d]||0)}"></span>`).join('');
+  $('#lbl').innerHTML=ds.map(d=>`<span>${fd(d,{weekday:'narrow'})}</span>`).join('');
+  $('#s1').textContent=fa(ds.reduce((a,d)=>a+(log[d]||0),0));$('#s2').textContent=fa(ds.reduce((a,d)=>a+(foc[d]||0),0));
+  $('#s3').textContent=fa(Math.max(0,...tasks.map(t=>t.best||0)));
+}
+function render(){
+  $('#title').textContent=view==='day'?(sel===TODAY?'丕賲乇賵夭貙 ':'')+fd(sel,{weekday:'long',day:'numeric',month:'long'}):VIEWS.find(v=>v[0]===view)[1].slice(3);
+  renderNav();renderWeek();renderList();renderStats();
+}
+
+// focus timer
+let left=1500,iv=null;
+const fmt=s=>fa(String(Math.floor(s/60)).padStart(2,'0'))+':'+fa(String(s%60).padStart(2,'0'));
+function resetTimer(){clearInterval(iv);iv=null;left=1500;$('#tm').textContent=fmt(left);$('#go').textContent='卮乇賵毓'}
+$('#rs').onclick=()=>{focusId=null;resetTimer();$('#ft').textContent='乇賵蹖 鈻� 讴賳丕乇 蹖讴 讴丕乇 亘夭賳'};
+$('#go').onclick=()=>{
+  if(iv){clearInterval(iv);iv=null;$('#go').textContent='丕丿丕賲賴';return}
+  $('#go').textContent='鬲賵賯賮';
+  iv=setInterval(()=>{left--;$('#tm').textContent=fmt(left);document.title=fmt(left)+' 路 蹖丕丿賲 賳乇賴';
+    if(left<=0){clearInterval(iv);iv=null;document.title='蹖丕丿賲 賳乇賴';beep();
+      foc[TODAY]=(foc[TODAY]||0)+25;const t=tasks.find(x=>x.id===focusId);if(t)t.foc=(t.foc||0)+25;
+      $('#ft').textContent='鄄鄣 丿賯蹖賯賴 鬲賲乇讴夭 讴丕賲賱 卮丿. 蹖賴 丕爻鬲乇丕丨鬲 亘讴賳 鈽�';left=1500;$('#go').textContent='卮乇賵毓';save()}},1000);
+};
+function beep(){try{const c=new AudioContext(),o=c.createOscillator();o.connect(c.destination);o.frequency.value=660;o.start();o.stop(c.currentTime+.4)}catch(e){}}
+
+// backup
+$('#exp').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({tasks,log,foc})],{type:'application/json'}));a.download='yadam-nare-backup.json';a.click()};
+$('#imp').onclick=()=>$('#file').click();
+$('#file').onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(x=>{try{const d=JSON.parse(x);if(Array.isArray(d.tasks)){tasks=d.tasks;log=d.log||{};foc=d.foc||{};save()}}catch(_){alert('賮丕蹖賱 賲毓鬲亘乇 賳蹖爻鬲')}})};
+
+preview();render();
+</script>
+</body>
+</html>
