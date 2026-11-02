@@ -77,6 +77,11 @@ ul{list-style:none;padding:0;display:grid;gap:9px}
 .side-bot{display:flex;gap:8px;flex-wrap:wrap}.side-bot button{flex:1;font-size:13px;color:var(--mu);padding:8px;border-radius:12px;background:var(--sf2)}
 .theme{position:fixed;top:calc(10px + env(safe-area-inset-top));left:12px;width:40px;height:40px;border-radius:50%;z-index:30}
 .app>aside:first-child .logo{display:block}
+dialog{border:1px solid var(--ln);background:color-mix(in srgb,var(--bg) 90%,#000);color:var(--ink);border-radius:24px;padding:20px;width:min(92vw,440px);-webkit-backdrop-filter:var(--bl);backdrop-filter:var(--bl);font-family:inherit;line-height:1.8}
+dialog::backdrop{background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.dp{font-size:14px;margin:8px 0}ol.dp{padding-right:20px}.dp a{color:var(--ac);font-weight:600}
+dialog input{width:100%;padding:10px 14px;margin:6px 0;border-radius:14px;border:1px solid var(--ln);background:var(--sf2);font-size:16px}
+.dr{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.dr button{padding:8px 18px;border-radius:99px;background:var(--sf2);font-weight:600}.dr .go{background:var(--ac);color:var(--ai)}
 @media(max-width:980px){
  .app{grid-template-columns:1fr;gap:16px;padding:calc(16px + env(safe-area-inset-top)) 14px calc(96px + env(safe-area-inset-bottom))}
  .panel{position:static}
@@ -129,9 +134,29 @@ ul{list-style:none;padding:0;display:grid;gap:9px}
    <div class="bars" id="bars"></div><div class="lbl" id="lbl"></div>
    <div class="stats" style="margin-top:12px"><div><b id="s1">&#x6F0;</b>&#x6A9;&#x627;&#x631; &#x627;&#x646;&#x62C;&#x627;&#x645;&#x200C;&#x634;&#x62F;&#x647;</div><div><b id="s2">&#x6F0;</b>&#x62F;&#x642;&#x6CC;&#x642;&#x647; &#x62A;&#x645;&#x631;&#x6A9;&#x632;</div><div><b id="s3">&#x6F0;</b>&#x628;&#x647;&#x62A;&#x631;&#x6CC;&#x646; &#x67E;&#x6CC;&#x648;&#x633;&#x62A;&#x6AF;&#x6CC;</div></div>
   </section>
- <section class="card"><div class="side-bot"><button id="exp">&#x2B07; &#x630;&#x62E;&#x6CC;&#x631;&#x647; &#x646;&#x633;&#x62E;&#x647; &#x67E;&#x634;&#x62A;&#x6CC;&#x628;&#x627;&#x646;</button><button id="imp">&#x2B06; &#x628;&#x627;&#x632;&#x6AF;&#x631;&#x62F;&#x627;&#x646;&#x6CC; &#x646;&#x633;&#x62E;&#x647; &#x67E;&#x634;&#x62A;&#x6CC;&#x628;&#x627;&#x646;</button><input type="file" id="file" accept=".json" hidden></div></section>
+ <section class="card"><div class="side-bot"><button id="exp">&#x2B07; &#x630;&#x62E;&#x6CC;&#x631;&#x647; &#x646;&#x633;&#x62E;&#x647; &#x67E;&#x634;&#x62A;&#x6CC;&#x628;&#x627;&#x646;</button><button id="imp">&#x2B06; &#x628;&#x627;&#x632;&#x6AF;&#x631;&#x62F;&#x627;&#x646;&#x6CC; &#x646;&#x633;&#x62E;&#x647; &#x67E;&#x634;&#x62A;&#x6CC;&#x628;&#x627;&#x646;</button><button id="syn" style="flex-basis:100%;background:var(--ac);color:var(--ai);font-weight:700">&#x2601; &#x647;&#x645;&#x6AF;&#x627;&#x645;&#x200C;&#x633;&#x627;&#x632;&#x6CC; &#x628;&#x6CC;&#x646; &#x62F;&#x633;&#x62A;&#x6AF;&#x627;&#x647;&#x200C;&#x647;&#x627;</button><div class="sub" id="sst" style="flex-basis:100%;font-size:12px"></div><input type="file" id="file" accept=".json" hidden></div></section>
  </aside>
 </div>
+
+<dialog id="dlg">
+ <h2 class="h2" style="font-size:18px">&#x647;&#x645;&#x6AF;&#x627;&#x645;&#x200C;&#x633;&#x627;&#x632;&#x6CC; &#x628;&#x6CC;&#x646; &#x62F;&#x633;&#x62A;&#x6AF;&#x627;&#x647;&#x200C;&#x647;&#x627;</h2>
+ <div id="dOff">
+  <p class="dp">&#x6A9;&#x627;&#x631;&#x647;&#x627;&#x6CC;&#x62A; &#x62F;&#x631; &#x6CC;&#x6A9; &#x641;&#x627;&#x6CC;&#x644; &#x62E;&#x635;&#x648;&#x635;&#x6CC; (Gist) &#x62F;&#x631; &#x62D;&#x633;&#x627;&#x628; &#x6AF;&#x6CC;&#x62A;&#x200C;&#x647;&#x627;&#x628; &#x62E;&#x648;&#x62F;&#x62A; &#x630;&#x62E;&#x6CC;&#x631;&#x647; &#x645;&#x6CC;&#x200C;&#x634;&#x648;&#x62F; &#x648; &#x631;&#x648;&#x6CC; &#x647;&#x645;&#x647; &#x62F;&#x633;&#x62A;&#x6AF;&#x627;&#x647;&#x200C;&#x647;&#x627; &#x6CC;&#x6A9;&#x6CC; &#x645;&#x6CC;&#x200C;&#x634;&#x648;&#x62F;. &#x631;&#x648;&#x6CC; &#x647;&#x631; &#x62F;&#x633;&#x62A;&#x6AF;&#x627;&#x647; &#x641;&#x642;&#x637; &#x6CC;&#x6A9; &#x628;&#x627;&#x631; &#x627;&#x6CC;&#x646; &#x645;&#x631;&#x627;&#x62D;&#x644; &#x631;&#x627; &#x627;&#x646;&#x62C;&#x627;&#x645; &#x628;&#x62F;&#x647;:</p>
+  <ol class="dp">
+   <li>&#x631;&#x648;&#x6CC; <a href="https://github.com/settings/tokens/new?scopes=gist&description=yadam-nare" target="_blank" rel="noopener">&#x633;&#x627;&#x62E;&#x62A; &#x62A;&#x648;&#x6A9;&#x646;</a> &#x628;&#x632;&#x646; (&#x648;&#x627;&#x631;&#x62F; &#x62D;&#x633;&#x627;&#x628; &#x6AF;&#x6CC;&#x62A;&#x200C;&#x647;&#x627;&#x628; &#x634;&#x648;).</li>
+   <li>&#x62F;&#x631; &#x635;&#x641;&#x62D;&#x647; &#x628;&#x627;&#x632; &#x634;&#x62F;&#x647;&#x60C; Expiration &#x631;&#x627; &#x631;&#x648;&#x6CC; &#xAB;No expiration&#xBB; &#x628;&#x6AF;&#x630;&#x627;&#x631;. &#x641;&#x642;&#x637; &#x6AF;&#x632;&#x6CC;&#x646;&#x647; gist &#x628;&#x627;&#x6CC;&#x62F; &#x62A;&#x6CC;&#x6A9; &#x62F;&#x627;&#x634;&#x62A;&#x647; &#x628;&#x627;&#x634;&#x62F;.</li>
+   <li>&#x67E;&#x627;&#x6CC;&#x6CC;&#x646; &#x635;&#x641;&#x62D;&#x647; &#x631;&#x648;&#x6CC; &#xAB;Generate token&#xBB; &#x628;&#x632;&#x646; &#x648; &#x62A;&#x648;&#x6A9;&#x646; &#x633;&#x628;&#x632; &#x631;&#x646;&#x6AF; &#x631;&#x627; &#x6A9;&#x67E;&#x6CC; &#x6A9;&#x646;.</li>
+   <li>&#x62A;&#x648;&#x6A9;&#x646; &#x631;&#x627; &#x627;&#x6CC;&#x646;&#x62C;&#x627; &#x628;&#x686;&#x633;&#x628;&#x627;&#x646; &#x648; &#x631;&#x648;&#x6CC; &#xAB;&#x627;&#x62A;&#x635;&#x627;&#x644;&#xBB; &#x628;&#x632;&#x646;.</li>
+  </ol>
+  <input type="password" id="tok" placeholder="ghp_..." dir="ltr" autocomplete="off">
+  <div class="dr"><button class="go" id="con">&#x627;&#x62A;&#x635;&#x627;&#x644;</button><button id="cl1">&#x628;&#x633;&#x62A;&#x646;</button></div>
+ </div>
+ <div id="dOn" hidden>
+  <p class="dp">&#x647;&#x645;&#x6AF;&#x627;&#x645;&#x200C;&#x633;&#x627;&#x632;&#x6CC; &#x641;&#x639;&#x627;&#x644; &#x627;&#x633;&#x62A;. &#x647;&#x631; &#x62A;&#x63A;&#x6CC;&#x6CC;&#x631;&#x6CC; &#x6A9;&#x647; &#x628;&#x62F;&#x647;&#x6CC; &#x686;&#x646;&#x62F; &#x62B;&#x627;&#x646;&#x6CC;&#x647; &#x628;&#x639;&#x62F; &#x631;&#x648;&#x6CC; &#x62F;&#x633;&#x62A;&#x6AF;&#x627;&#x647;&#x200C;&#x647;&#x627;&#x6CC; &#x62F;&#x6CC;&#x6AF;&#x631; &#x647;&#x645; &#x645;&#x6CC;&#x200C;&#x622;&#x6CC;&#x62F; (&#x635;&#x641;&#x62D;&#x647; &#x628;&#x627;&#x632; &#x628;&#x627;&#x634;&#x62F; &#x6CC;&#x627; &#x62F;&#x648;&#x628;&#x627;&#x631;&#x647; &#x628;&#x627;&#x632; &#x634;&#x648;&#x62F;).</p>
+  <div class="dr"><button class="go" id="now">&#x647;&#x645;&#x6AF;&#x627;&#x645;&#x200C;&#x633;&#x627;&#x632;&#x6CC; &#x627;&#x644;&#x627;&#x646;</button><button id="dis">&#x642;&#x637;&#x639; &#x627;&#x62A;&#x635;&#x627;&#x644;</button><button id="cl2">&#x628;&#x633;&#x62A;&#x646;</button></div>
+ </div>
+ <p class="dp" style="font-size:12px;color:var(--mu)">&#x62A;&#x648;&#x6A9;&#x646; &#x631;&#x627; &#x628;&#x647; &#x6A9;&#x633;&#x6CC; &#x646;&#x62F;&#x647;. &#x641;&#x642;&#x637; &#x631;&#x648;&#x6CC; &#x647;&#x645;&#x6CC;&#x646; &#x645;&#x631;&#x648;&#x631;&#x6AF;&#x631; &#x630;&#x62E;&#x6CC;&#x631;&#x647; &#x645;&#x6CC;&#x200C;&#x634;&#x648;&#x62F; &#x648; &#x641;&#x642;&#x637; &#x628;&#x647; Gist &#x62F;&#x633;&#x62A;&#x631;&#x633;&#x6CC; &#x62F;&#x627;&#x631;&#x62F;.</p>
+</dialog>
 
 <script>
 const $=s=>document.querySelector(s), fa=n=>Number(n).toLocaleString('fa-IR');
@@ -139,10 +164,11 @@ const iso=d=>{const x=new Date(d);return new Date(x.getTime()-x.getTimezoneOffse
 const add=(s,n)=>{const d=new Date(s+'T12:00');d.setDate(d.getDate()+n);return iso(d)};
 const TODAY=iso(new Date());
 const ST={g(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},s(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-let tasks=ST.g('yn2_tasks',[]), log=ST.g('yn2_log',{}), foc=ST.g('yn2_foc',{});
+let tasks=ST.g('yn2_tasks',[]), log=ST.g('yn2_log',{}), foc=ST.g('yn2_foc',{}), dead=ST.g('yn2_dead',{});
 let sel=TODAY, view='day', wk=0, q='', focusId=null;
 const CATS=['\ud83c\udfe0 \u0634\u062e\u0635\u06cc','\ud83d\udcbc \u06a9\u0627\u0631','\ud83d\uded2 \u062e\u0631\u06cc\u062f','\ud83d\udcda \u06cc\u0627\u062f\u06af\u06cc\u0631\u06cc','\ud83d\udcaa \u0633\u0644\u0627\u0645\u062a'];
-const save=()=>{ST.s('yn2_tasks',tasks);ST.s('yn2_log',log);ST.s('yn2_foc',foc);render()};
+const persist=()=>{ST.s('yn2_tasks',tasks);ST.s('yn2_log',log);ST.s('yn2_foc',foc);ST.s('yn2_dead',dead)};
+const save=()=>{persist();render();sched()};
 
 // theme + header
 const R=document.documentElement;R.dataset.theme=ST.g('yn_theme','dark');
@@ -171,7 +197,7 @@ function preview(){
 }
 function addTask(){
   const p=parse($('#in').value);if(!p.text){$('#in').focus();return}
-  tasks.unshift({id:Date.now(),text:p.text,cat:p.cat||cur,pri:p.pri,due:p.due,rep:p.rep,done:false,streak:0,best:0,foc:0});
+  tasks.unshift({id:Date.now(),u:Date.now(),text:p.text,cat:p.cat||cur,pri:p.pri,due:p.due,rep:p.rep,done:false,streak:0,best:0,foc:0});
   $('#in').value='';preview();save();
 }
 $('#in').addEventListener('input',preview);
@@ -180,6 +206,7 @@ document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement.t
 
 // complete
 function toggle(t){
+  t.u=Date.now();
   if(t.rep){
     t.streak++;t.best=Math.max(t.best,t.streak);log[TODAY]=(log[TODAY]||0)+1;
     t.due=add(t.due<TODAY?TODAY:t.due,t.rep==='d'?1:7);
@@ -228,9 +255,9 @@ function renderList(){
     li.querySelector('.chk').onclick=()=>toggle(t);
     const[b1,b2]=li.querySelectorAll('.ib');
     b1.onclick=()=>{focusId=t.id;resetTimer();$('#ft').textContent='\ud83c\udfaf '+t.text;$('#go').click()};
-    b2.onclick=()=>{tasks=tasks.filter(x=>x.id!==t.id);save()};
+    b2.onclick=()=>{dead[t.id]=Date.now();tasks=tasks.filter(x=>x.id!==t.id);save()};
     tx.ondblclick=()=>{tx.contentEditable=true;tx.focus()};
-    const fin=()=>{if(tx.contentEditable!=='true')return;tx.contentEditable=false;const v=tx.textContent.trim();if(v)t.text=v;save()};
+    const fin=()=>{if(tx.contentEditable!=='true')return;tx.contentEditable=false;const v=tx.textContent.trim();if(v){t.text=v;t.u=Date.now()}save()};
     tx.onblur=fin;tx.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();tx.blur()}};
     ul.appendChild(li);
   });
@@ -263,7 +290,7 @@ $('#go').onclick=()=>{
   $('#go').textContent='\u062a\u0648\u0642\u0641';
   iv=setInterval(()=>{left--;$('#tm').textContent=fmt(left);document.title=fmt(left)+' \u00b7 \u06cc\u0627\u062f\u0645 \u0646\u0631\u0647';
     if(left<=0){clearInterval(iv);iv=null;document.title='\u06cc\u0627\u062f\u0645 \u0646\u0631\u0647';beep();
-      foc[TODAY]=(foc[TODAY]||0)+25;const t=tasks.find(x=>x.id===focusId);if(t)t.foc=(t.foc||0)+25;
+      foc[TODAY]=(foc[TODAY]||0)+25;const t=tasks.find(x=>x.id===focusId);if(t){t.foc=(t.foc||0)+25;t.u=Date.now()};
       $('#ft').textContent='\u06f2\u06f5 \u062f\u0642\u06cc\u0642\u0647 \u062a\u0645\u0631\u06a9\u0632 \u06a9\u0627\u0645\u0644 \u0634\u062f. \u06cc\u0647 \u0627\u0633\u062a\u0631\u0627\u062d\u062a \u0628\u06a9\u0646 \u2615';left=1500;$('#go').textContent='\u0634\u0631\u0648\u0639';save()}},1000);
 };
 function beep(){try{const c=new AudioContext(),o=c.createOscillator();o.connect(c.destination);o.frequency.value=660;o.start();o.stop(c.currentTime+.4)}catch(e){}}
@@ -271,9 +298,53 @@ function beep(){try{const c=new AudioContext(),o=c.createOscillator();o.connect(
 // backup
 $('#exp').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({tasks,log,foc})],{type:'application/json'}));a.download='yadam-nare-backup.json';a.click()};
 $('#imp').onclick=()=>$('#file').click();
-$('#file').onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(x=>{try{const d=JSON.parse(x);if(Array.isArray(d.tasks)){tasks=d.tasks;log=d.log||{};foc=d.foc||{};save()}}catch(_){alert('\u0641\u0627\u06cc\u0644 \u0645\u0639\u062a\u0628\u0631 \u0646\u06cc\u0633\u062a')}})};
+$('#file').onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(x=>{try{const d=JSON.parse(x);if(Array.isArray(d.tasks)){tasks=d.tasks.map(t=>({...t,u:Date.now()}));log=d.log||{};foc=d.foc||{};save()}}catch(_){alert('\u0641\u0627\u06cc\u0644 \u0645\u0639\u062a\u0628\u0631 \u0646\u06cc\u0633\u062a')}})};
 
 preview();render();
+
+// ---- sync via private GitHub Gist ----
+const FN='yadam-nare.json';
+let SY=ST.g('yn2_sync',null), pushT=null, syncing=false, again=false;
+const setSt=m=>{$('#sst').textContent=m};
+const gh=(path,opt={})=>fetch('https://api.github.com'+path,{cache:'no-store',...opt,headers:{Authorization:'Bearer '+SY.token,Accept:'application/vnd.github+json','Content-Type':'application/json'}})
+  .then(r=>{if(!r.ok)throw new Error(r.status);return r.json()});
+const canon=o=>JSON.stringify({v:2,tasks:o.tasks||[],log:o.log||{},foc:o.foc||{},dead:o.dead||{}},(k,v)=>Array.isArray(v)&&k==='tasks'?[...v].sort((a,b)=>a.id-b.id):(v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.entries(v).sort()):v));
+const mx=(a,b)=>{const o={...a};for(const k in b)o[k]=Math.max(o[k]||0,b[k]);return o};
+function merge(r){
+  const m=new Map();
+  [...tasks,...(r.tasks||[])].forEach(t=>{const o=m.get(t.id);if(!o||(t.u||0)>(o.u||0))m.set(t.id,t)});
+  const d=mx(dead,r.dead||{});
+  tasks=[...m.values()].filter(t=>!(d[t.id]>(t.u||0)));dead=d;log=mx(log,r.log||{});foc=mx(foc,r.foc||{});
+}
+function sched(){if(SY){clearTimeout(pushT);pushT=setTimeout(sync,1500)}}
+async function sync(){
+  if(!SY)return;if(syncing){again=true;return}
+  syncing=true;setSt('\u062f\u0631 \u062d\u0627\u0644 \u0647\u0645\u06af\u0627\u0645\u200c\u0633\u0627\u0632\u06cc\u2026');
+  try{
+    if(!SY.gid){const list=await gh('/gists?per_page=100');const f=list.find(g=>g.files&&g.files[FN]);if(f)SY.gid=f.id}
+    let remote=null;
+    if(SY.gid){const g=await gh('/gists/'+SY.gid);if(g.files[FN])remote=JSON.parse(g.files[FN].content)}
+    if(remote)merge(remote);
+    const mine={tasks,log,foc,dead};
+    if(!remote||canon(remote)!==canon(mine)){
+      const content=JSON.stringify({v:2,...mine});
+      if(SY.gid)await gh('/gists/'+SY.gid,{method:'PATCH',body:JSON.stringify({files:{[FN]:{content}}})});
+      else{const g=await gh('/gists',{method:'POST',body:JSON.stringify({description:'yadam-nare',public:false,files:{[FN]:{content}}})});SY.gid=g.id}
+    }
+    ST.s('yn2_sync',SY);persist();render();
+    setSt('\u2713 \u0647\u0645\u06af\u0627\u0645 \u0634\u062f\u060c \u0633\u0627\u0639\u062a '+new Date().toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'}));
+  }catch(e){setSt(String(e.message)==='401'?'\u062a\u0648\u06a9\u0646 \u0645\u0639\u062a\u0628\u0631 \u0646\u06cc\u0633\u062a\u061b \u062f\u0648\u0628\u0627\u0631\u0647 \u0645\u062a\u0635\u0644 \u06a9\u0646':'\u0627\u062a\u0635\u0627\u0644 \u0628\u0631\u0642\u0631\u0627\u0631 \u0646\u0634\u062f\u061b \u0628\u0639\u062f\u0627\u064b \u062f\u0648\u0628\u0627\u0631\u0647 \u062a\u0644\u0627\u0634 \u0645\u06cc\u200c\u0634\u0648\u062f')}
+  syncing=false;if(again){again=false;sched()}
+}
+function syncUI(){$('#dOff').hidden=!!SY;$('#dOn').hidden=!SY;if(!SY)setSt('')}
+$('#syn').onclick=()=>{syncUI();$('#dlg').showModal()};
+['#cl1','#cl2'].forEach(i=>$(i).onclick=()=>$('#dlg').close());
+$('#con').onclick=()=>{const t=$('#tok').value.trim();if(!t)return;SY={token:t};$('#tok').value='';ST.s('yn2_sync',SY);syncUI();sync()};
+$('#now').onclick=sync;
+$('#dis').onclick=()=>{SY=null;try{localStorage.removeItem('yn2_sync')}catch(e){}syncUI()};
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)sync()});
+addEventListener('online',sync);setInterval(sync,60000);
+if(SY)sync();
 </script>
 </body>
 </html>
