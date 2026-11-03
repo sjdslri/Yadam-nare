@@ -37,6 +37,7 @@ button,input,select{font:inherit;color:inherit}button{cursor:pointer;border:0;ba
 .day i{position:absolute;bottom:3px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--ac)}
 .day[aria-pressed=true] i{background:var(--ai)}
 .arr{width:34px;height:34px;border-radius:50%;flex:none}
+.crow{display:flex;gap:8px;align-items:center}.crow input{flex:1;min-width:0}.addb{flex:none;background:var(--ac);color:var(--ai);font-weight:800;border-radius:16px;padding:0 18px;min-height:44px}.addb:active{transform:scale(.95)}
 .comp input[type=text]{width:100%;border:0;background:none;font-size:18px;padding:8px 6px}.comp input:focus{outline:none}
 .comp input::placeholder,.srch::placeholder{color:var(--mu)}
 .pv{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding-top:8px;border-top:1px dashed var(--ln);font-size:13px}
@@ -72,6 +73,12 @@ ul{list-style:none;padding:0;display:grid;gap:9px}
 .tm{font-size:46px;font-weight:900;text-align:center;font-variant-numeric:tabular-nums;line-height:1.2}
 .ft{text-align:center;font-size:13px;color:var(--mu);min-height:22px;margin-bottom:8px;overflow-wrap:anywhere}
 .fb{display:flex;gap:8px;justify-content:center}
+[hidden]{display:none!important}
+.seg{display:flex;background:var(--sf2);border-radius:99px;padding:3px;margin-bottom:10px}.seg button{flex:1;padding:6px;border-radius:99px;color:var(--mu);font-size:14px}.seg button[aria-pressed=true]{background:var(--ac);color:var(--ai);font-weight:700}
+.tin{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}.tin label{display:grid;gap:2px;font-size:12px;color:var(--mu);text-align:center}
+.tin input{width:100%;text-align:center;padding:6px 2px;border-radius:12px;border:1px solid var(--ln);background:var(--sf2);color:var(--ink);font-size:20px;font-weight:700;min-height:44px}
+.chips{display:flex;gap:6px;justify-content:center;align-items:center;flex-wrap:wrap;margin-bottom:6px;font-size:12px;color:var(--mu)}.chips button{padding:2px 12px;border-radius:99px;background:var(--sf2);font-size:14px;color:var(--ink)}
+.seg button:disabled,.chips button:disabled,.tin input:disabled{opacity:.5}
 .fb button{padding:8px 22px;border-radius:99px;background:var(--sf2);font-weight:600}.fb .go{background:var(--ac);color:var(--ai)}
 .stats{display:flex;justify-content:space-around;text-align:center;font-size:12px;color:var(--mu)}.stats b{display:block;font-size:20px;color:var(--ink)}
 .side-bot{display:flex;gap:8px;flex-wrap:wrap}.side-bot button{flex:1;font-size:13px;color:var(--mu);padding:8px;border-radius:12px;background:var(--sf2)}
@@ -111,7 +118,7 @@ dialog input{width:100%;padding:10px 14px;margin:6px 0;border-radius:14px;border
   <div class="hd"><small id="hello"></small><h1 id="title"></h1></div>
   <div class="week"><button class="arr" id="nx" aria-label="&#x647;&#x641;&#x62A;&#x647; &#x628;&#x639;&#x62F;">&#x203A;</button><div class="days" id="days"></div><button class="arr" id="pv" aria-label="&#x647;&#x641;&#x62A;&#x647; &#x642;&#x628;&#x644;">&#x2039;</button></div>
   <section class="card comp">
-   <input type="text" id="in" maxlength="140" autocomplete="off" placeholder="&#x645;&#x62B;&#x644;&#x627;&#x64B;: &#x62A;&#x645;&#x62F;&#x6CC;&#x62F; &#x642;&#x628;&#x636; &#x627;&#x6CC;&#x646;&#x62A;&#x631;&#x646;&#x62A; &#x641;&#x631;&#x62F;&#x627; &#x645;&#x647;&#x645; #&#x62E;&#x631;&#x6CC;&#x62F;">
+   <div class="crow"><input type="text" id="in" maxlength="140" autocomplete="off" enterkeyhint="done" placeholder="&#x645;&#x62B;&#x644;&#x627;&#x64B;: &#x62A;&#x645;&#x62F;&#x6CC;&#x62F; &#x642;&#x628;&#x636; &#x627;&#x6CC;&#x646;&#x62A;&#x631;&#x646;&#x62A; &#x641;&#x631;&#x62F;&#x627; &#x645;&#x647;&#x645; #&#x62E;&#x631;&#x6CC;&#x62F;"><button class="addb" id="addb" type="button" aria-label="&#x627;&#x641;&#x632;&#x648;&#x62F;&#x646;">+ &#x627;&#x641;&#x632;&#x648;&#x62F;&#x646;</button></div>
    <div class="pv" id="pre"></div>
   </section>
   <input class="srch" id="q" type="search" placeholder="&#x62C;&#x633;&#x62A;&#x200C;&#x648;&#x62C;&#x648; &#x62F;&#x631; &#x6A9;&#x627;&#x631;&#x647;&#x627;&#x2026;" aria-label="&#x62C;&#x633;&#x62A;&#x200C;&#x648;&#x62C;&#x648;">
@@ -124,9 +131,12 @@ dialog input{width:100%;padding:10px 14px;margin:6px 0;border-radius:14px;border
    <div class="sub" id="sub"></div>
   </section>
   <section class="card">
-   <div class="h2">&#x62A;&#x645;&#x631;&#x6A9;&#x632;</div>
+   <div class="h2">&#x62A;&#x627;&#x6CC;&#x645;&#x631;</div>
+   <div class="seg" id="seg"><button data-m="a" aria-pressed="true">&#x23F0; &#x622;&#x644;&#x627;&#x631;&#x645;</button><button data-m="s" aria-pressed="false">&#x23F1; &#x6A9;&#x631;&#x646;&#x648;&#x645;&#x62A;&#x631;</button></div>
+   <div class="tin" id="tin"><label>&#x633;&#x627;&#x639;&#x62A;<input id="th" inputmode="numeric" maxlength="2" aria-label="&#x633;&#x627;&#x639;&#x62A;"></label><label>&#x62F;&#x642;&#x6CC;&#x642;&#x647;<input id="tmn" inputmode="numeric" maxlength="3" aria-label="&#x62F;&#x642;&#x6CC;&#x642;&#x647;"></label><label>&#x62B;&#x627;&#x646;&#x6CC;&#x647;<input id="ts" inputmode="numeric" maxlength="2" aria-label="&#x62B;&#x627;&#x646;&#x6CC;&#x647;"></label></div>
+   <div class="chips" id="chp"><button data-q="5">&#x6F5;</button><button data-q="10">&#x6F1;&#x6F0;</button><button data-q="25">&#x6F2;&#x6F5;</button><button data-q="45">&#x6F4;&#x6F5;</button><button data-q="60">&#x6F6;&#x6F0;</button><span>&#x62F;&#x642;&#x6CC;&#x642;&#x647;</span></div>
    <div class="tm" id="tm">&#x6F2;&#x6F5;:&#x6F0;&#x6F0;</div>
-   <div class="ft" id="ft">&#x631;&#x648;&#x6CC; &#x25B6; &#x6A9;&#x646;&#x627;&#x631; &#x6CC;&#x6A9; &#x6A9;&#x627;&#x631; &#x628;&#x632;&#x646;</div>
+   <div class="ft" id="ft">&#x631;&#x648;&#x6CC; &#x25B6; &#x6A9;&#x646;&#x627;&#x631; &#x6CC;&#x6A9; &#x6A9;&#x627;&#x631; &#x628;&#x632;&#x646; &#x62A;&#x627; &#x632;&#x645;&#x627;&#x646;&#x634; &#x62B;&#x628;&#x62A; &#x634;&#x648;&#x62F;</div>
    <div class="fb"><button class="go" id="go">&#x634;&#x631;&#x648;&#x639;</button><button id="rs">&#x631;&#x6CC;&#x633;&#x62A;</button></div>
   </section>
   <section class="card">
@@ -200,7 +210,7 @@ function addTask(){
   tasks.unshift({id:Date.now(),u:Date.now(),text:p.text,cat:p.cat||cur,pri:p.pri,due:p.due,rep:p.rep,done:false,streak:0,best:0,foc:0});
   $('#in').value='';preview();save();
 }
-$('#in').addEventListener('input',preview);
+$('#in').addEventListener('input',preview);$('#addb').onclick=addTask;
 $('#in').addEventListener('keydown',e=>{if(e.key==='Enter')addTask()});
 document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement.tagName!=='INPUT'&&!document.activeElement.isContentEditable){e.preventDefault();$('#in').focus()}});
 
@@ -280,20 +290,42 @@ function render(){
   renderNav();renderWeek();renderList();renderStats();
 }
 
-// focus timer
-let left=1500,iv=null;
-const fmt=s=>fa(String(Math.floor(s/60)).padStart(2,'0'))+':'+fa(String(s%60).padStart(2,'0'));
-function resetTimer(){clearInterval(iv);iv=null;left=1500;$('#tm').textContent=fmt(left);$('#go').textContent='\u0634\u0631\u0648\u0639'}
-$('#rs').onclick=()=>{focusId=null;resetTimer();$('#ft').textContent='\u0631\u0648\u06cc \u25b6 \u06a9\u0646\u0627\u0631 \u06cc\u06a9 \u06a9\u0627\u0631 \u0628\u0632\u0646'};
-$('#go').onclick=()=>{
-  if(iv){clearInterval(iv);iv=null;$('#go').textContent='\u0627\u062f\u0627\u0645\u0647';return}
-  $('#go').textContent='\u062a\u0648\u0642\u0641';
-  iv=setInterval(()=>{left--;$('#tm').textContent=fmt(left);document.title=fmt(left)+' \u00b7 \u06cc\u0627\u062f\u0645 \u0646\u0631\u0647';
-    if(left<=0){clearInterval(iv);iv=null;document.title='\u06cc\u0627\u062f\u0645 \u0646\u0631\u0647';beep();
-      foc[TODAY]=(foc[TODAY]||0)+25;const t=tasks.find(x=>x.id===focusId);if(t){t.foc=(t.foc||0)+25;t.u=Date.now()};
-      $('#ft').textContent='\u06f2\u06f5 \u062f\u0642\u06cc\u0642\u0647 \u062a\u0645\u0631\u06a9\u0632 \u06a9\u0627\u0645\u0644 \u0634\u062f. \u06cc\u0647 \u0627\u0633\u062a\u0631\u0627\u062d\u062a \u0628\u06a9\u0646 \u2615';left=1500;$('#go').textContent='\u0634\u0631\u0648\u0639';save()}},1000);
-};
-function beep(){try{const c=new AudioContext(),o=c.createOscillator();o.connect(c.destination);o.frequency.value=660;o.start();o.stop(c.currentTime+.4)}catch(e){}}
+// timer: alarm (countdown) + stopwatch
+const pn=n=>Number(n).toLocaleString('fa-IR',{useGrouping:false});
+const ndg=x=>String(x).replace(/[\u06f0-\u06f9]/g,c=>c.charCodeAt(0)-1776).replace(/[\u0660-\u0669]/g,c=>c.charCodeAt(0)-1632);
+const TS=ST.g('yn_tm',{m:'a',h:0,mi:25,s:0});
+let tmode=TS.m,running=false,t0=0,acc=0,logged=0,iv=null,AC=null;
+const pd=n=>String(n).padStart(2,'0').replace(/\d/g,d=>'\u06f0\u06f1\u06f2\u06f3\u06f4\u06f5\u06f6\u06f7\u06f8\u06f9'[d]);
+const fmtT=s=>{const h=Math.floor(s/3600),m=Math.floor(s%3600/60);return(h?pd(h)+':':'')+pd(m)+':'+pd(s%60)};
+const gv=id=>parseInt(ndg($(id).value).replace(/\D/g,''))||0;
+const totalMs=()=>(gv('#th')*3600+gv('#tmn')*60+gv('#ts'))*1000;
+const elapsed=()=>acc+(running?Date.now()-t0:0);
+const actx=()=>{try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume()}catch(e){}return AC};
+function beep(f,d){const c=actx();if(!c)return;const o=c.createOscillator(),g=c.createGain(),t=c.currentTime;o.frequency.value=f;o.connect(g);g.connect(c.destination);
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.4,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.start(t);o.stop(t+d+.05)}
+function ring(){for(let i=0;i<8;i++)setTimeout(()=>beep(i%2?660:880,.35),i*450);try{navigator.vibrate&&navigator.vibrate([300,150,300,150,300])}catch(e){}}
+function showT(){const ms=tmode==='a'?Math.max(0,totalMs()-elapsed()):elapsed();$('#tm').textContent=fmtT(tmode==='a'?Math.ceil(ms/1000):Math.floor(ms/1000))}
+function lock(b){['#th','#tmn','#ts'].forEach(i=>$(i).disabled=b);document.querySelectorAll('#seg button,#chp button').forEach(x=>x.disabled=b)}
+function logFocus(){const m=Math.floor(elapsed()/60000)-logged;if(m>0){logged+=m;foc[TODAY]=(foc[TODAY]||0)+m;const t=tasks.find(x=>x.id===focusId);if(t){t.foc=(t.foc||0)+m;t.u=Date.now()}save()}}
+function start(){
+  if(tmode==='a'&&totalMs()<=0){$('#ft').textContent='\u0627\u0648\u0644 \u06cc\u0647 \u0632\u0645\u0627\u0646 \u0648\u0627\u0631\u062f \u06a9\u0646';return}
+  actx();running=true;t0=Date.now();lock(true);$('#go').textContent='\u062a\u0648\u0642\u0641';clearInterval(iv);iv=setInterval(tick,250);tick();
+}
+function stop(){if(!running)return;acc+=Date.now()-t0;running=false;clearInterval(iv);iv=null;logFocus();$('#go').textContent='\u0627\u062f\u0627\u0645\u0647';showT()}
+function tick(){showT();document.title=$('#tm').textContent+' \u00b7 \u06cc\u0627\u062f\u0645 \u0646\u0631\u0647';if(tmode==='a'&&elapsed()>=totalMs())finish()}
+function finish(){clearInterval(iv);iv=null;running=false;acc=totalMs();logFocus();acc=0;logged=0;lock(false);ring();
+  document.title='\u06cc\u0627\u062f\u0645 \u0646\u0631\u0647';$('#go').textContent='\u0634\u0631\u0648\u0639';$('#ft').textContent='\u23f0 \u0648\u0642\u062a \u062a\u0645\u0648\u0645 \u0634\u062f!';showT()}
+function resetTimer(){clearInterval(iv);iv=null;if(running){acc+=Date.now()-t0;running=false}logFocus();acc=0;logged=0;lock(false);$('#go').textContent='\u0634\u0631\u0648\u0639';document.title='\u06cc\u0627\u062f\u0645 \u0646\u0631\u0647';showT()}
+$('#rs').onclick=()=>{focusId=null;resetTimer();$('#ft').textContent='\u0631\u0648\u06cc \u25b6 \u06a9\u0646\u0627\u0631 \u06cc\u06a9 \u06a9\u0627\u0631 \u0628\u0632\u0646 \u062a\u0627 \u0632\u0645\u0627\u0646\u0634 \u062b\u0628\u062a \u0634\u0648\u062f'};
+$('#go').onclick=()=>running?stop():start();
+function setMode(m){tmode=m;document.querySelectorAll('#seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
+  $('#tin').hidden=$('#chp').hidden=m==='s';showT();ST.s('yn_tm',{m,h:gv('#th'),mi:gv('#tmn'),s:gv('#ts')})}
+document.querySelectorAll('#seg button').forEach(b=>b.onclick=()=>setMode(b.dataset.m));
+document.querySelectorAll('#chp button').forEach(b=>b.onclick=()=>{$('#th').value=0;$('#tmn').value=pn(+b.dataset.q);$('#ts').value=0;setMode(tmode)});
+['#th','#tmn','#ts'].forEach(i=>$(i).oninput=()=>{showT();ST.s('yn_tm',{m:tmode,h:gv('#th'),mi:gv('#tmn'),s:gv('#ts')})});
+['#th','#tmn','#ts'].forEach(i=>$(i).onfocus=e=>e.target.select&&e.target.select());
+document.addEventListener('visibilitychange',()=>{if(running)tick()});
+$('#th').value=pn(TS.h);$('#tmn').value=pn(TS.mi);$('#ts').value=pn(TS.s);setMode(tmode);
 
 // backup
 $('#exp').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({tasks,log,foc})],{type:'application/json'}));a.download='yadam-nare-backup.json';a.click()};
